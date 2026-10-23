@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUSCLE MANIA | Premium Fitness Club</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Space+Grotesk:wght@500;700;800;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        night: {
+                            DEFAULT: '#090A0D',
+                            card: '#12151C',
+                            border: '#232836',
+                            hover: '#191D27'
+                        },
+                        gold: {
+                            DEFAULT: '#D4AF37',
+                            light: '#F3E5AB',
+                            dark: '#AA8828',
+                            muted: 'rgba(212, 175, 55, 0.15)'
+                        },
+                        crimson: {
+                            DEFAULT: '#DC2626',
+                            bright: '#EF4444',
+                            dark: '#991B1B',
+                            muted: 'rgba(220, 38, 38, 0.15)'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        heading: ['Space Grotesk', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #090A0D;
+            color: #E2E8F0;
+            overflow-x: hidden;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090A0D;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #DC2626 0%, #D4AF37 100%);
+            border-radius: 9999px;
+            border: 1px solid #232836;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #EF4444 0%, #F3E5AB 100%);
+        }
+
+        /* Gradient Utilities */
+        .gradient-text-gold {
+            background: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #AA8828 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-text-crimson {
+            background: linear-gradient(135deg, #EF4444 0%, #DC2626 50%, #991B1B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-text-gold-crimson {
+            background: linear-gradient(90deg, #D4AF37 0%, #EF4444 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Gradient Card Backgrounds */
+        .gradient-card-dark {
+            background: linear-gradient(145deg, #161A23 0%, #0D0F14 100%);
+        }
+        
+        .gradient-card-crimson {
+            background: linear-gradient(145deg, rgba(220, 38, 38, 0.12) 0%, rgba(18, 21, 28, 0.95) 100%);
+        }
+
+        .gradient-card-gold {
+            background: linear-gradient(145deg, rgba(212, 175, 55, 0.12) 0%, rgba(18, 21, 28, 0.95) 100%);
+        }
+
+        /* Gradient Buttons */
+        .btn-gradient-crimson {
+            background: linear-gradient(135deg, #EF4444 0%, #DC2626 60%, #991B1B 100%);
+            box-shadow: 0 4px 20px rgba(220, 38, 38, 0.35);
+        }
+        .btn-gradient-crimson:hover {
+            background: linear-gradient(135deg, #F87171 0%, #EF4444 60%, #B91C1C 100%);
+            box-shadow: 0 6px 25px rgba(220, 38, 38, 0.55);
+        }
+
+        .btn-gradient-gold {
+            background: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 60%, #AA8828 100%);
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.35);
+        }
+        .btn-gradient-gold:hover {
+            background: linear-gradient(135deg, #FFFFFF 0%, #F3E5AB 60%, #D4AF37 100%);
+            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.55);
+        }
+
+        /* Custom Solid/Subtle Border Fallbacks with Glows */
+        .border-gold-solid {
+            border: 1px solid #D4AF37;
+        }
+        .border-crimson-solid {
+            border: 1px solid #DC2626;
+        }
+        .border-gold-subtle {
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        .border-crimson-subtle {
+            border: 1px solid rgba(220, 38, 38, 0.35);
+        }
+
+        /* 3D Card Hover Perspective & Ambient Glow */
+        .card-3d-wrap {
+            perspective: 1000px;
+        }
+        .card-3d {
+            transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transform-style: preserve-3d;
+        }
+        .card-3d:hover {
+            box-shadow: 0 20px 40px -10px rgba(220, 38, 38, 0.3), 0 0 20px rgba(212, 175, 55, 0.15);
+        }
+
+        /* Active Navigation Link Highlight */
+        .nav-link.active {
+            color: #F3E5AB;
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.25) 0%, rgba(212, 175, 55, 0.15) 100%);
+            border: 1px solid #DC2626;
+            box-shadow: 0 0 12px rgba(220, 38, 38, 0.3);
+        }
+
+        /* Range Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: linear-gradient(90deg, #12151C 0%, #232836 100%);
+            border-radius: 9999px;
+            height: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+            cursor: pointer;
+            border: 2px solid #F3E5AB;
+            box-shadow: 0 0 15px rgba(220, 38, 38, 0.9);
+        }
+
+        /* Pulsing Logo Ring */
+        .logo-ring {
+            box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.6);
+            animation: pulseRing 2s infinite;
+        }
+        @keyframes pulseRing {
+            0% { box-shadow: 0 0 0 0px rgba(220, 38, 38, 0.8), 0 0 10px rgba(212, 175, 55, 0.4); }
+            70% { box-shadow: 0 0 0 12px rgba(220, 38, 38, 0), 0 0 20px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0px rgba(220, 38, 38, 0), 0 0 0px rgba(212, 175, 55, 0); }
+        }
+
+        /* Radial Spotlight Background Gradients */
+        .spotlight-crimson {
+            background: radial-gradient(circle, rgba(220, 38, 38, 0.15) 0%, rgba(9, 10, 13, 0) 70%);
+        }
+        .spotlight-gold {
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, rgba(9, 10, 13, 0) 70%);
+        }
+
+        /* Slideshow Transition Effects */
+        .slide-fade {
+            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+        }
+    </style>
+</head>
+<body class="selection:bg-crimson selection:text-white relative">
+
+    <!-- Background Gold & Crimson Ambient Radial Lights -->
+    <div class="fixed top-0 left-1/4 w-[600px] h-[600px] spotlight-crimson pointer-events-none z-0 blur-3xl"></div>
+    <div class="fixed bottom-1/3 right-1/4 w-[600px] h-[600px] spotlight-gold pointer-events-none z-0 blur-3xl"></div>
+
+    <!-- Background Gold & Crimson Particles Canvas -->
+    <canvas id="particleCanvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-50"></canvas>
+
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-night/90 backdrop-blur-xl border-b border-night-border/80 py-3 transition-all duration-300" id="mainHeader">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+            
+            <!-- Official Brand Logo & Name -->
+            <a href="#home" onclick="playSfx('click')" class="flex items-center gap-3 group">
+                <div class="relative w-12 h-12 rounded-full overflow-hidden p-0.5 bg-gradient-to-br from-crimson via-gold to-crimson-dark logo-ring shrink-0">
+                    <img class="brand-logo-img w-full h-full object-cover rounded-full group-hover:scale-110 transition-transform duration-300" 
+                         alt="Muscle Mania Official Logo" 
+                         onerror="this.onerror=null; this.src='https://placehold.co/100x100/dc2626/ffffff?text=MM';">
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-heading font-black text-xl sm:text-2xl tracking-wider text-white leading-none">
+                        MUSCLE <span class="gradient-text-crimson">MANIA</span>
+                    </span>
+                    <span class="text-[9px] font-bold tracking-widest gradient-text-gold uppercase mt-0.5">PREMIUM FITNESS CLUB</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+                <a href="#home" class="nav-link px-3.5 py-2 rounded-full text-xs font-bold text-gray-300 hover:text-gold hover:border-crimson-subtle transition-all">HOME</a>
+                <a href="#about" class="nav-link px-3.5 py-2 rounded-full text-xs font-bold text-gray-300 hover:text-gold hover:border-crimson-subtle transition-all">ABOUT</a>
+                <a href="#gallery" class="nav-link px-3.5 py-2 rounded-full text-xs font-bold text-gray-300 hover:text-gold hover:border-crimson-subtle transition-all">GALLERY</a>
+                <a href="#facilities" class="nav-link px-3.5 py-2 rounded-full text-xs font-bold text-gray-300 hover:text-gold hover:border-crimson-subtle transition-all">FACILITIES</a>
+                <a href="#timings" class="nav-link px-3.5 py-2 rounded-full text-xs font-bold text-gray-300 hover:text-gold hover:border-crimson-subtle transition-all">TIMINGS</a>
+                <a href="#pricing" class="nav-link px-3.5 py-2 rounded-full text-xs font-bold text-gray-300 hover:text-gold hover:border-crimson-subtle transition-all">PRICING</a>
+                <a href="#bmi" class="nav-link px-3.5 py-2 rounded-full text-xs font-bold text-gray-300 hover:text-gold hover:border-crimson-subtle transition-all">BMI CALCULATOR</a>
+                <a href="#contact" class="nav-link px-3.5 py-2 rounded-full text-xs font-bold text-gray-300 hover:text-gold hover:border-crimson-subtle transition-all">CONTACT</a>
+            </nav>
+
+            <!-- SFX Toggle & WhatsApp CTA -->
+            <div class="flex items-center gap-3">
+                <button id="sfxToggleBtn" onclick="toggleAudioEngine()" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-night-card to-night border border-crimson-subtle text-gold text-xs font-bold hover:border-gold-solid hover:shadow-lg transition-all" title="Toggle Audio SFX">
+                    <i class="fa-solid fa-volume-high text-sm text-crimson" id="sfxIcon"></i>
+                    <span id="sfxStatusText" class="gradient-text-gold">SFX MAX</span>
+                </button>
+                <a href="https://wa.me/15550199882?text=Hi%20Muscle%20Mania!%20I%20want%20to%20join%20the%20gym." target="_blank" onclick="playSfx('heavy')" class="hidden sm:inline-flex items-center gap-2 btn-gradient-crimson text-white font-bold text-xs uppercase px-5 py-2.5 rounded-full transition-all border border-gold-solid/50">
+                    <i class="fa-brands fa-whatsapp text-base text-gold"></i>
+                    <span>JOIN NOW</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Containers -->
+    <main class="relative z-10 pt-20">
+
+        <!-- SECTION 1: HOME (HERO) -->
+        <section id="home" class="min-h-screen flex items-center justify-center py-16 px-4 relative overflow-hidden">
+            <div class="max-w-6xl mx-auto text-center flex flex-col items-center relative z-10">
+                
+                <!-- Large Central Brand Crest Emblem -->
+                <div class="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full p-1.5 bg-gradient-to-tr from-crimson via-gold to-crimson shadow-2xl mb-8 card-3d">
+                    <div class="w-full h-full rounded-full overflow-hidden border-2 border-night bg-black flex items-center justify-center">
+                        <img class="brand-logo-img w-full h-full object-cover" 
+                             alt="Muscle Mania Official Emblem" 
+                             onerror="this.onerror=null; this.src='https://placehold.co/200x200/dc2626/ffffff?text=MUSCLE+MANIA';">
+                    </div>
+                </div>
+
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-crimson/20 via-night-card to-gold/20 border border-crimson-solid mb-6 shadow-lg">
+                    <span class="w-2.5 h-2.5 rounded-full bg-crimson animate-ping"></span>
+                    <span class="gradient-text-gold text-xs font-bold uppercase tracking-widest">OFFICIAL KAMAREDDY ARENA</span>
+                </div>
+                
+                <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black font-heading text-white uppercase tracking-tight leading-none mb-6">
+                    BUILD YOUR <br>
+                    <span class="gradient-text-crimson">LEGACY</span> & <span class="gradient-text-gold">MUSCLE</span>
+                </h1>
+                
+                <p class="max-w-2xl mx-auto text-gray-300 text-base sm:text-lg mb-10 leading-relaxed font-light">
+                    Step into Kamareddy's official heavy-iron temple. Equipped with custom biomechanical machinery, powerlifting racks, steam baths, and elite certified coaches.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 w-full max-w-md">
+                    <a href="#pricing" onclick="playSfx('heavy')" class="w-full sm:w-auto px-8 py-4 rounded-full btn-gradient-crimson text-white font-extrabold text-sm uppercase tracking-wider border border-gold-solid/50 transition-all flex items-center justify-center gap-3">
+                        <span>VIEW PACKAGES</span>
+                        <i class="fa-solid fa-arrow-right text-gold"></i>
+                    </a>
+                    <a href="#gallery" onclick="playSfx('click')" class="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-night-card to-night border border-gold-solid text-gold font-bold text-sm uppercase tracking-wider hover:border-crimson-solid transition-all flex items-center justify-center gap-3 shadow-lg">
+                        <span class="gradient-text-gold">VIEW GALLERY</span>
+                        <i class="fa-solid fa-images text-crimson"></i>
+                    </a>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl mx-auto">
+                    <div class="p-6 rounded-3xl gradient-card-dark border border-crimson-subtle card-3d relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-b from-crimson/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="text-3xl sm:text-4xl font-black font-heading gradient-text-crimson mb-1 relative z-10">12,000+</div>
+                        <div class="text-xs uppercase text-gray-400 font-semibold tracking-wider relative z-10">Sq. Ft Arena</div>
+                    </div>
+                    <div class="p-6 rounded-3xl gradient-card-dark border border-gold-subtle card-3d relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-b from-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="text-3xl sm:text-4xl font-black font-heading gradient-text-gold mb-1 relative z-10">150+</div>
+                        <div class="text-xs uppercase text-gray-400 font-semibold tracking-wider relative z-10">Iron Machines</div>
+                    </div>
+                    <div class="p-6 rounded-3xl gradient-card-dark border border-crimson-subtle card-3d relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-b from-crimson/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="text-3xl sm:text-4xl font-black font-heading gradient-text-crimson mb-1 relative z-10">15+</div>
+                        <div class="text-xs uppercase text-gray-400 font-semibold tracking-wider relative z-10">Pro Coaches</div>
+                    </div>
+                    <div class="p-6 rounded-3xl gradient-card-dark border border-gold-subtle card-3d relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-b from-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="text-3xl sm:text-4xl font-black font-heading gradient-text-gold mb-1 relative z-10">2,500+</div>
+                        <div class="text-xs uppercase text-gray-400 font-semibold tracking-wider relative z-10">Active Squad</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SECTION 2: ABOUT -->
+        <section id="about" class="py-24 px-4 bg-gradient-to-b from-night via-night-card/70 to-night border-y border-night-border relative">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-xs font-bold text-crimson uppercase tracking-widest mb-2">THE BRAND IDENTITY</h2>
+                    <h3 class="text-3xl sm:text-5xl font-black font-heading text-white">THE MUSCLE MANIA</h3>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    
+                    <!-- About Brand Banner -->
+                    <div class="p-8 rounded-3xl gradient-card-crimson border border-crimson-solid card-3d flex flex-col items-center text-center relative overflow-hidden">
+                        <div class="w-32 h-32 rounded-full overflow-hidden p-1 bg-gradient-to-tr from-gold via-crimson to-gold mb-6 shadow-xl">
+                            <img class="brand-logo-img w-full h-full object-cover rounded-full" 
+                                 alt="Muscle Mania Emblem" 
+                                 onerror="this.onerror=null; this.src='https://placehold.co/150x150/dc2626/ffffff?text=LOGO';">
+                        </div>
+                        <h4 class="text-2xl font-bold font-heading text-white mb-3">Forged For Absolute Champions</h4>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-6 font-light">
+                            Represented by the iconic fist and iron barbell logo, Muscle Mania stands as the ultimate benchmark for discipline, strength, and transformation.
+                        </p>
+                        <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-crimson/20 to-crimson/5 border border-crimson text-crimson font-bold text-xs uppercase shadow-inner">
+                            <i class="fa-solid fa-shield-halved text-gold"></i>
+                            <span class="gradient-text-gold">100% UNCOMPROMISED QUALITY</span>
+                        </div>
+                    </div>
+
+                    <!-- About Core Pillars -->
+                    <div class="p-8 rounded-3xl gradient-card-dark border border-gold-subtle card-3d space-y-6">
+                        <div>
+                            <h4 class="text-xl font-bold font-heading text-gold mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-dumbbell text-crimson"></i>
+                                <span class="gradient-text-gold">Heavy Iron & Precision Cables</span>
+                            </h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                We house custom dumbbell setups up to 80kg, heavy plate-loaded leverage machines, and Olympic deadlift platforms engineered for serious lifters.
+                            </p>
+                        </div>
+
+                        <div>
+                            <h4 class="text-xl font-bold font-heading text-gold mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-user-ninja text-crimson"></i>
+                                <span class="gradient-text-gold">Scientific Guidance</span>
+                            </h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                Certified personal trainers with proven competitive records guiding your progressive overload, form biomechanics, BCA body composition tracking, and nutrition protocols.
+                            </p>
+                        </div>
+
+                        <ul class="space-y-2.5 pt-4 border-t border-night-border text-sm text-gray-300">
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-check text-crimson"></i>
+                                <span>Customized Meal & Macro Blueprinting</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-check text-crimson"></i>
+                                <span>High-Output Air Circulation & Acoustic Vibe</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SECTION 3: GYM IMAGES SLIDESHOW GALLERY -->
+        <section id="gallery" class="py-24 px-4 relative">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-xs font-bold text-gold uppercase tracking-widest mb-2">ARENA SHOWCASE</h2>
+                    <h3 class="text-3xl sm:text-5xl font-black font-heading text-white">GYM PHOTO GALLERY</h3>
+                    <p class="text-gray-400 text-sm mt-2 max-w-lg mx-auto">Explore our heavy iron zones, cardio desk, and luxury infrastructure.</p>
+                </div>
+
+                <!-- Gallery Slideshow Card Container -->
+                <div class="relative max-w-4xl mx-auto rounded-3xl gradient-card-dark border border-crimson-solid shadow-2xl p-3 sm:p-5 card-3d overflow-hidden">
+                    
+                    <!-- Main Image Display Container -->
+                    <div class="relative w-full h-[320px] sm:h-[480px] md:h-[540px] rounded-2xl overflow-hidden bg-black flex items-center justify-center group">
+                        
+                        <!-- Slideshow Main Image -->
+                        <img id="slideshowImg" 
+                             src="" 
+                             alt="Gym Gallery Slide" 
+                             class="w-full h-full object-cover slide-fade transition-all duration-500">
+
+                        <!-- Dark Overlay Accent -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none"></div>
+
+                        <!-- Image Counter Badge -->
+                        <div class="absolute top-4 left-4 z-20 px-3.5 py-1.5 rounded-full bg-night/80 backdrop-blur-md border border-gold-solid text-gold text-xs font-black tracking-wider flex items-center gap-2 shadow-lg">
+                            <i class="fa-solid fa-image text-crimson"></i>
+                            <span id="slideCounter">1 / 1</span>
+                        </div>
+
+                        <!-- Path Source Indicator Badge -->
+                        <div class="absolute top-4 right-4 z-20 px-3 py-1.5 rounded-full bg-night/80 backdrop-blur-md border border-crimson-subtle text-gray-300 text-[11px] font-mono flex items-center gap-1.5 shadow-lg">
+                            <i class="fa-solid fa-folder-open text-gold"></i>
+                            <span id="folderPathDisplay" class="max-w-[150px] sm:max-w-[220px] truncate">images/gym/</span>
+                        </div>
+
+                        <!-- Slide Navigation Arrows -->
+                        <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-night/70 border border-gold-solid text-gold text-lg flex items-center justify-center hover:bg-crimson hover:text-white transition-all shadow-xl active:scale-95">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-night/70 border border-gold-solid text-gold text-lg flex items-center justify-center hover:bg-crimson hover:text-white transition-all shadow-xl active:scale-95">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+
+                        <!-- Bottom Slide Title / Caption Overlay -->
+                        <div class="absolute bottom-4 left-4 right-4 z-20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-white">
+                            <div>
+                                <h4 id="slideTitle" class="font-heading font-extrabold text-lg sm:text-xl gradient-text-gold drop-shadow-md">MUSCLE MANIA ARENA</h4>
+                                <p id="slideSubtitle" class="text-xs text-gray-300 font-light">Custom Biomechanical Heavy Iron Section</p>
+                            </div>
+                            
+                            <!-- Autoplay Toggle Button -->
+                            <button id="autoplayBtn" onclick="toggleAutoplay()" class="px-3.5 py-1.5 rounded-full bg-crimson/80 border border-crimson-solid text-white text-xs font-bold flex items-center gap-2 shadow-md hover:bg-crimson transition-all">
+                                <i id="autoplayIcon" class="fa-solid fa-pause text-xs"></i>
+                                <span id="autoplayText">PAUSE</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Slide Dots Centered Container -->
+                    <div class="mt-4 flex items-center justify-center px-2">
+                        <div id="slideDotsContainer" class="flex items-center gap-2 overflow-x-auto max-w-full py-1">
+                            <!-- JS injects dots dynamically -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SECTION 4: FACILITIES -->
+        <section id="facilities" class="py-24 px-4 relative">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-xs font-bold text-gold uppercase tracking-widest mb-2">STATE OF THE ART</h2>
+                    <h3 class="text-3xl sm:text-5xl font-black font-heading text-white">WORLD CLASS FACILITIES</h3>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Facility 1 -->
+                    <div class="p-6 rounded-3xl gradient-card-dark border border-night-border hover:border-crimson-solid transition-all card-3d group relative overflow-hidden">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-crimson/20 to-night border border-crimson-solid flex items-center justify-center text-crimson text-2xl mb-6 group-hover:bg-gradient-to-br group-hover:from-crimson group-hover:to-crimson-dark group-hover:text-white transition-all shadow-md">
+                            <i class="fa-solid fa-dumbbell"></i>
+                        </div>
+                        <h4 class="text-xl font-bold font-heading text-white mb-2">Heavy Iron Zone</h4>
+                        <p class="text-xs text-gray-400 leading-relaxed">
+                            Power racks, Smith machines, steel plates, and dumbbells up to 80kg.
+                        </p>
+                    </div>
+
+                    <!-- Facility 2 -->
+                    <div class="p-6 rounded-3xl gradient-card-dark border border-night-border hover:border-gold-solid transition-all card-3d group relative overflow-hidden">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-gold/20 to-night border border-gold-solid flex items-center justify-center text-gold text-2xl mb-6 group-hover:bg-gradient-to-br group-hover:from-gold group-hover:to-gold-dark group-hover:text-night transition-all shadow-md">
+                            <i class="fa-solid fa-heart-pulse"></i>
+                        </div>
+                        <h4 class="text-xl font-bold font-heading text-white mb-2">Cardio Matrix</h4>
+                        <p class="text-xs text-gray-400 leading-relaxed">
+                            Commercial stairmasters, curved treadmills, air bikes, and rowers.
+                        </p>
+                    </div>
+
+                    <!-- Facility 3 -->
+                    <div class="p-6 rounded-3xl gradient-card-dark border border-night-border hover:border-crimson-solid transition-all card-3d group relative overflow-hidden">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-crimson/20 to-night border border-crimson-solid flex items-center justify-center text-crimson text-2xl mb-6 group-hover:bg-gradient-to-br group-hover:from-crimson group-hover:to-crimson-dark group-hover:text-white transition-all shadow-md">
+                            <i class="fa-solid fa-spa"></i>
+                        </div>
+                        <h4 class="text-xl font-bold font-heading text-white mb-2">Steam Detox & BCA</h4>
+                        <p class="text-xs text-gray-400 leading-relaxed">
+                            Eucalyptus steam bath detox suites and medical-grade Body Composition Analysis.
+                        </p>
+                    </div>
+
+                    <!-- Facility 4 -->
+                    <div class="p-6 rounded-3xl gradient-card-dark border border-night-border hover:border-gold-solid transition-all card-3d group relative overflow-hidden">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-gold/20 to-night border border-gold-solid flex items-center justify-center text-gold text-2xl mb-6 group-hover:bg-gradient-to-br group-hover:from-gold group-hover:to-gold-dark group-hover:text-night transition-all shadow-md">
+                            <i class="fa-solid fa-shield"></i>
+                        </div>
+                        <h4 class="text-xl font-bold font-heading text-white mb-2">Luxury Lockers</h4>
+                        <p class="text-xs text-gray-400 leading-relaxed">
+                            Dedicated annual lockers and keypad security.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SECTION 5: TIMINGS & SCHEDULE -->
+        <section id="timings" class="py-24 px-4 bg-gradient-to-b from-night via-night-card/70 to-night border-y border-night-border relative">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-xs font-bold text-crimson uppercase tracking-widest mb-2">OPERATIONAL HOURS</h2>
+                    <h3 class="text-3xl sm:text-5xl font-black font-heading text-white">TRAIN ON YOUR SCHEDULE</h3>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Schedule Table Card -->
+                    <div class="p-8 rounded-3xl gradient-card-dark border border-crimson-subtle card-3d">
+                        <h4 class="text-xl font-bold font-heading text-white mb-6 flex items-center gap-3">
+                            <i class="fa-solid fa-clock text-crimson"></i>
+                            <span>Weekly Gym Schedule</span>
+                        </h4>
+
+                        <div class="space-y-4 text-sm">
+                            <div class="flex justify-between items-center py-3 border-b border-night-border">
+                                <span class="text-gray-300 font-semibold flex items-center gap-2">
+                                    <i class="fa-solid fa-mars text-blue-400"></i> Gents Session (Morning)
+                                </span>
+                                <span class="gradient-text-gold font-bold font-heading">05:00 AM – 11:00 AM</span>
+                            </div>
+                            <div class="flex justify-between items-center py-3 border-b border-night-border">
+                                <span class="text-gray-300 font-semibold flex items-center gap-2">
+                                    <i class="fa-solid fa-venus text-pink-400"></i> Ladies Session (Exclusive)
+                                </span>
+                                <span class="gradient-text-crimson font-bold font-heading">11:00 AM – 04:00 PM</span>
+                            </div>
+                            <div class="flex justify-between items-center py-3 border-b border-night-border">
+                                <span class="text-gray-300 font-semibold flex items-center gap-2">
+                                    <i class="fa-solid fa-mars text-blue-400"></i> Gents Session (Evening)
+                                </span>
+                                <span class="gradient-text-gold font-bold font-heading">04:00 PM – 10:00 PM</span>
+                            </div>
+                            <div class="flex justify-between items-center py-3">
+                                <span class="text-gray-300 font-semibold">Personal Trainer Batches</span>
+                                <span class="text-white font-bold">Flexible Custom Slots</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Peak Hours Tracker -->
+                    <div class="p-8 rounded-3xl gradient-card-dark border border-gold-subtle card-3d flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-xl font-bold font-heading text-white mb-2 flex items-center gap-3">
+                                <i class="fa-solid fa-chart-line text-gold"></i>
+                                <span>Peak Traffic Tracker</span>
+                            </h4>
+                            <p class="text-xs text-gray-400 mb-6">Plan your workout to suit your training style.</p>
+
+                            <div class="space-y-5">
+                                <div>
+                                    <div class="flex justify-between text-xs font-semibold mb-1.5">
+                                        <span class="text-gray-400">Gents Morning (05:00 AM - 11:00 AM)</span>
+                                        <span class="text-gold">High Energy (85%)</span>
+                                    </div>
+                                    <div class="w-full h-2 rounded-full bg-night border border-night-border overflow-hidden p-0.5">
+                                        <div class="h-full bg-gradient-to-r from-gold-dark via-gold to-gold-light w-[85%] rounded-full"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between text-xs font-semibold mb-1.5">
+                                        <span class="text-gray-400">Ladies Batch (11:00 AM - 04:00 PM)</span>
+                                        <span class="text-pink-400">Exclusive (60%)</span>
+                                    </div>
+                                    <div class="w-full h-2 rounded-full bg-night border border-night-border overflow-hidden p-0.5">
+                                        <div class="h-full bg-gradient-to-r from-pink-600 to-pink-400 w-[60%] rounded-full"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between text-xs font-semibold mb-1.5">
+                                        <span class="text-gray-400">Gents Evening (04:00 PM - 10:00 PM)</span>
+                                        <span class="text-crimson">Max Vibe (95%)</span>
+                                    </div>
+                                    <div class="w-full h-2 rounded-full bg-night border border-night-border overflow-hidden p-0.5">
+                                        <div class="h-full bg-gradient-to-r from-crimson-dark via-crimson to-crimson-bright w-[95%] rounded-full"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-night-border text-center">
+                            <span class="text-xs text-gray-400">AC & High-Bass Music active in all slots.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SECTION 6: PRICING / MEMBERSHIP PACKAGES -->
+        <section id="pricing" class="py-24 px-4 relative">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-xs font-bold text-gold uppercase tracking-widest mb-2">MEMBERSHIP TIERS</h2>
+                    <h3 class="text-3xl sm:text-5xl font-black font-heading text-white">CHOOSE YOUR PACKAGE</h3>
+                    <p class="text-gray-400 text-sm mt-3 max-w-xl mx-auto">Select standard gym floor access or upgrade with cardio matrix, steam bath sessions & BCA tests.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+                    
+                    <!-- PLAN 1: MONTHLY -->
+                    <div class="p-6 rounded-3xl gradient-card-dark border border-night-border hover:border-gold-solid transition-all card-3d flex flex-col justify-between group relative">
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-xs font-bold text-gold uppercase tracking-wider px-3 py-1 rounded-full bg-gold/10 border border-gold-solid">SHORT TERM</span>
+                                <i class="fa-solid fa-calendar-day text-gold text-lg"></i>
+                            </div>
+                            <h4 class="text-2xl font-black font-heading text-white mb-2">MONTHLY</h4>
+                            <p class="text-xs text-gray-400 mb-6">Flexibility with full gym access.</p>
+
+                            <!-- Standard Pricing -->
+                            <div class="p-4 rounded-2xl bg-night/80 border border-night-border mb-3">
+                                <div class="text-[10px] font-bold text-gray-400 uppercase">STANDARD GYM</div>
+                                <div class="text-2xl font-black font-heading text-white">₹1,000 <span class="text-xs font-normal text-gray-400">/mo</span></div>
+                            </div>
+
+                            <!-- Cardio Option -->
+                            <div class="p-4 rounded-2xl bg-gradient-to-br from-crimson/15 to-night border border-crimson-subtle mb-6">
+                                <div class="text-[10px] font-bold text-crimson uppercase">WITH CARDIO</div>
+                                <div class="text-2xl font-black font-heading text-crimson">₹1,500 <span class="text-xs font-normal text-gray-400">/mo</span></div>
+                            </div>
+
+                            <!-- Features List -->
+                            <ul class="space-y-2.5 text-xs text-gray-300 mb-6">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i> Heavy Iron & Dumbbells Access</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i> Full Floor Guidance</li>
+                            </ul>
+                        </div>
+
+                        <button onclick="claimPlan('Monthly Plan', 'Standard ₹1000 / Cardio ₹1500')" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-night to-night-card border border-gold-solid text-gold font-bold text-xs uppercase hover:bg-gold hover:text-night transition-all flex items-center justify-center gap-2 shadow-md">
+                            <i class="fa-brands fa-whatsapp text-sm"></i>
+                            <span>CLAIM MONTHLY</span>
+                        </button>
+                    </div>
+
+
+                    <!-- PLAN 2: 3 MONTHS -->
+                    <div class="p-6 rounded-3xl gradient-card-dark border border-night-border hover:border-crimson-solid transition-all card-3d flex flex-col justify-between group relative">
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-xs font-bold text-crimson uppercase tracking-wider px-3 py-1 rounded-full bg-crimson/10 border border-crimson-solid">QUARTERLY</span>
+                                <i class="fa-solid fa-fire text-crimson text-lg"></i>
+                            </div>
+                            <h4 class="text-2xl font-black font-heading text-white mb-2">3 MONTHS</h4>
+                            <p class="text-xs text-gray-400 mb-6">Build foundational consistency.</p>
+
+                            <!-- Standard Pricing -->
+                            <div class="p-4 rounded-2xl bg-night/80 border border-night-border mb-3">
+                                <div class="text-[10px] font-bold text-gray-400 uppercase">STANDARD GYM</div>
+                                <div class="text-2xl font-black font-heading text-white">₹2,500 <span class="text-xs font-normal text-gray-400">/3 mos</span></div>
+                            </div>
+
+                            <!-- Cardio Option -->
+                            <div class="p-4 rounded-2xl bg-gradient-to-br from-crimson/15 to-night border border-crimson-subtle mb-6">
+                                <div class="text-[10px] font-bold text-crimson uppercase">WITH CARDIO</div>
+                                <div class="text-2xl font-black font-heading text-crimson">₹4,000 <span class="text-xs font-normal text-gray-400">/3 mos</span></div>
+                            </div>
+
+                            <!-- Features List -->
+                            <ul class="space-y-2.5 text-xs text-gray-300 mb-6">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-crimson"></i> Heavy Iron & Dumbbells Access</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-crimson"></i> Full Floor Guidance</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-crimson"></i> Save ₹500 on standard rate</li>
+                            </ul>
+                        </div>
+
+                        <button onclick="claimPlan('3 Months Package', 'Standard ₹2500 / Cardio ₹4000')" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-night to-night-card border border-crimson-solid text-crimson font-bold text-xs uppercase hover:bg-crimson hover:text-white transition-all flex items-center justify-center gap-2 shadow-md">
+                            <i class="fa-brands fa-whatsapp text-sm"></i>
+                            <span>CLAIM 3 MONTHS</span>
+                        </button>
+                    </div>
+
+
+                    <!-- PLAN 3: 6 MONTHS -->
+                    <div class="p-6 rounded-3xl gradient-card-gold border-2 border-gold-solid card-3d flex flex-col justify-between relative overflow-hidden group shadow-2xl">
+                        <div class="absolute -right-10 top-5 bg-gradient-to-r from-gold-dark to-gold text-night text-[9px] font-black uppercase py-1 px-10 rotate-45 shadow-md">POPULAR</div>
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-xs font-bold text-gold uppercase tracking-wider px-3 py-1 rounded-full bg-gold/20 border border-gold-solid">HALF YEAR</span>
+                                <i class="fa-solid fa-crown text-gold text-lg"></i>
+                            </div>
+                            <h4 class="text-2xl font-black font-heading text-white mb-2">6 MONTHS</h4>
+                            <p class="text-xs text-gray-400 mb-6">Serious physique transformation.</p>
+
+                            <!-- Standard Pricing -->
+                            <div class="p-4 rounded-2xl bg-night/80 border border-gold-subtle mb-3">
+                                <div class="text-[10px] font-bold text-gold uppercase">STANDARD GYM</div>
+                                <div class="text-2xl font-black font-heading gradient-text-gold">₹5,500 <span class="text-xs font-normal text-gray-400">/6 mos</span></div>
+                                <div class="text-[10px] text-green-400 font-bold mt-1">★ FREE 1 Steam Bath Session</div>
+                            </div>
+
+                            <!-- Cardio Option -->
+                            <div class="p-4 rounded-2xl bg-gradient-to-br from-crimson/20 to-night border border-crimson-solid mb-6">
+                                <div class="text-[10px] font-bold text-crimson uppercase">WITH CARDIO</div>
+                                <div class="text-2xl font-black font-heading text-crimson">₹8,500 <span class="text-xs font-normal text-gray-400">/6 mos</span></div>
+                                <div class="text-[10px] text-green-400 font-bold mt-1">★ FREE 1 Steam Bath + 1 BCA Test</div>
+                            </div>
+
+                            <!-- Features List -->
+                            <ul class="space-y-2.5 text-xs text-gray-300 mb-6">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-gold"></i> Heavy Iron + Full Cardio Zone</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-gold"></i> 1x Free Steam Bath Detox</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-gold"></i> 1x Free BCA Body Composition</li>
+                            </ul>
+                        </div>
+
+                        <button onclick="claimPlan('6 Months Package', 'Standard ₹5500 (1 Free Steam) / Cardio ₹8500 (1 Free Steam + 1 Free BCA)')" class="w-full py-3.5 rounded-2xl btn-gradient-gold text-night font-extrabold text-xs uppercase transition-all flex items-center justify-center gap-2 shadow-lg">
+                            <i class="fa-brands fa-whatsapp text-sm"></i>
+                            <span>CLAIM 6 MONTHS</span>
+                        </button>
+                    </div>
+
+
+                    <!-- PLAN 4: 12 MONTHS -->
+                    <div class="p-6 rounded-3xl gradient-card-crimson border-2 border-crimson-solid card-3d flex flex-col justify-between relative overflow-hidden group shadow-2xl">
+                        <div class="absolute -right-10 top-5 bg-gradient-to-r from-crimson-dark to-crimson text-white text-[9px] font-black uppercase py-1 px-10 rotate-45 shadow-md">BEST VALUE</div>
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-xs font-bold text-crimson uppercase tracking-wider px-3 py-1 rounded-full bg-crimson/20 border border-crimson-solid">ANNUAL VIP</span>
+                                <i class="fa-solid fa-gem text-crimson text-lg"></i>
+                            </div>
+                            <h4 class="text-2xl font-black font-heading text-white mb-2">12 MONTHS</h4>
+                            <p class="text-xs text-gray-400 mb-6">Full year ultimate elite pass.</p>
+
+                            <!-- Standard Pricing -->
+                            <div class="p-4 rounded-2xl bg-night/80 border border-crimson-subtle mb-3">
+                                <div class="text-[10px] font-bold text-gray-300 uppercase">STANDARD GYM</div>
+                                <div class="text-2xl font-black font-heading text-white">₹11,000 <span class="text-xs font-normal text-gray-400">/yr</span></div>
+                                <div class="text-[10px] text-green-400 font-bold mt-1">★ FREE 2 Steam Baths + 1 BCA Test</div>
+                            </div>
+
+                            <!-- Cardio Option -->
+                            <div class="p-4 rounded-2xl bg-gradient-to-br from-gold/20 to-night border border-gold-solid mb-6">
+                                <div class="text-[10px] font-bold text-gold uppercase">WITH CARDIO + LOCKER</div>
+                                <div class="text-2xl font-black font-heading gradient-text-gold">₹16,000 <span class="text-xs font-normal text-gray-400">/yr</span></div>
+                                <div class="text-[10px] text-green-400 font-bold mt-1">★ FREE 12M Locker + 2 Steam + 2 BCA</div>
+                            </div>
+
+                            <!-- Features List -->
+                            <ul class="space-y-2.5 text-xs text-gray-300 mb-6">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-crimson"></i> 12 Months Free Personal Locker</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-crimson"></i> 2x Free Steam Bath Sessions</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-crimson"></i> 2x Free BCA Body Composition</li>
+                            </ul>
+                        </div>
+
+                        <button onclick="claimPlan('12 Months Package', 'Standard ₹11000 (2 Steam + 1 BCA) / Cardio ₹16000 (12M Locker + 2 Steam + 2 BCA)')" class="w-full py-3.5 rounded-2xl btn-gradient-crimson text-white font-extrabold text-xs uppercase border border-gold-solid/50 transition-all flex items-center justify-center gap-2 shadow-lg">
+                            <i class="fa-brands fa-whatsapp text-sm text-gold"></i>
+                            <span>CLAIM 12 MONTHS</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SECTION 7: BMI CALCULATOR -->
+        <section id="bmi" class="py-24 px-4 bg-gradient-to-b from-night via-night-card/70 to-night border-y border-night-border relative">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-xs font-bold text-gold uppercase tracking-widest mb-2">BODY METRICS PROTOCOL</h2>
+                    <h3 class="text-3xl sm:text-5xl font-black font-heading text-white">BMI CALCULATOR</h3>
+                </div>
+
+                <div class="p-8 sm:p-10 rounded-3xl gradient-card-dark border border-crimson-solid card-3d shadow-2xl">
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        
+                        <!-- Inputs -->
+                        <div class="space-y-6">
+                            <!-- Height Slider -->
+                            <div>
+                                <div class="flex justify-between text-sm font-bold mb-2">
+                                    <label for="heightRange" class="text-gray-300">HEIGHT</label>
+                                    <span class="text-crimson font-heading text-base"><span id="heightVal">175</span> cm</span>
+                                </div>
+                                <input type="range" id="heightRange" min="120" max="220" value="175" class="w-full cursor-pointer" oninput="calculateBMI()">
+                            </div>
+
+                            <!-- Weight Slider -->
+                            <div>
+                                <div class="flex justify-between text-sm font-bold mb-2">
+                                    <label for="weightRange" class="text-gray-300">WEIGHT</label>
+                                    <span class="text-gold font-heading text-base"><span id="weightVal">75</span> kg</span>
+                                </div>
+                                <input type="range" id="weightRange" min="40" max="160" value="75" class="w-full cursor-pointer" oninput="calculateBMI()">
+                            </div>
+
+                            <!-- Gender Selection Toggle -->
+                            <div class="pt-2">
+                                <label class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">GENDER</label>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <button type="button" onclick="setGender('male')" id="btnMale" class="py-3 rounded-2xl border border-crimson-solid btn-gradient-crimson text-white font-bold text-xs uppercase transition-all shadow-md">MALE</button>
+                                    <button type="button" onclick="setGender('female')" id="btnFemale" class="py-3 rounded-2xl border border-night-border bg-night text-gray-300 font-bold text-xs uppercase hover:border-gold-solid transition-all">FEMALE</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Results Gauge & Status -->
+                        <div class="text-center p-6 rounded-2xl bg-gradient-to-br from-night to-night-card border border-gold-subtle flex flex-col items-center justify-center shadow-inner">
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">YOUR SCORE</span>
+                            <div id="bmiScore" class="text-5xl sm:text-6xl font-black font-heading gradient-text-gold mb-2">24.5</div>
+                            <div id="bmiCategory" class="text-sm font-bold uppercase tracking-wider px-4 py-1.5 rounded-full bg-gold/10 text-gold border border-gold-solid mb-4">NORMAL WEIGHT</div>
+                            <p id="bmiAdvice" class="text-xs text-gray-400 max-w-xs leading-relaxed">
+                                Optimal body composition! Keep building lean mass in our Heavy Iron zone.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SECTION 8: CONTACT -->
+        <section id="contact" class="py-24 px-4 relative">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-xs font-bold text-crimson uppercase tracking-widest mb-2">GET IN TOUCH</h2>
+                    <h3 class="text-3xl sm:text-5xl font-black font-heading text-white">JOIN MUSCLE MANIA</h3>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 items-stretch">
+                    
+                    <!-- Direct Contact Card -->
+                    <div class="p-8 rounded-3xl gradient-card-crimson border border-crimson-solid flex flex-col justify-between card-3d">
+                        <div>
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-10 h-10 rounded-full overflow-hidden border border-gold-solid bg-black p-0.5 shrink-0">
+                                    <img class="brand-logo-img w-full h-full object-cover rounded-full" alt="Logo">
+                                </div>
+                                <h4 class="text-2xl font-bold font-heading text-white">FRONT DESK HELPLINE</h4>
+                            </div>
+                            
+                            <div class="space-y-6">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-crimson/20 to-crimson/5 border border-crimson-solid flex items-center justify-center text-crimson shrink-0 shadow-md">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-gray-400 font-semibold uppercase">GYM LOCATION</div>
+                                        <div class="text-sm font-bold text-white mt-0.5">Beside SR Garndens, Old NH7 Road, Kamareddy, Telangana 503111</div>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold/20 to-gold/5 border border-gold-solid flex items-center justify-center text-gold shrink-0 shadow-md">
+                                        <i class="fa-solid fa-phone"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-gray-400 font-semibold uppercase">DIRECT PHONE CALL</div>
+                                        <a href="tel:+917036371095" onclick="playSfx('heavy')" class="text-sm font-bold text-gold hover:underline mt-0.5 block gradient-text-gold">+91 98765 43210</a>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-500/20 to-green-500/5 border border-green-500 flex items-center justify-center text-green-400 shrink-0 shadow-md">
+                                        <i class="fa-brands fa-whatsapp"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-gray-400 font-semibold uppercase">WHATSAPP DESK</div>
+                                        <a href="https://wa.me/7036371095?text=Hi%20Muscle%20Mania!%20I%20have%20an%20inquiry." target="_blank" onclick="playSfx('heavy')" class="text-sm font-bold text-green-400 hover:underline mt-0.5 block">+91 7036371095</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Direct Action Buttons -->
+                        <div class="grid grid-cols-2 gap-4 mt-8 pt-6 border-t border-night-border">
+                            <a href="https://wa.me/7036371095?text=Hi%20Muscle%20Mania!%20I%20want%20to%20know%20more%20about%20memberships." target="_blank" onclick="playSfx('heavy')" class="py-3.5 px-4 rounded-2xl bg-gradient-to-r from-green-600 to-green-500 text-white font-bold text-xs uppercase flex items-center justify-center gap-2 hover:from-green-500 hover:to-green-400 transition-all shadow-md">
+                                <i class="fa-brands fa-whatsapp text-lg"></i>
+                                <span>WHATSAPP</span>
+                            </a>
+                            <a href="tel:+917036371095" onclick="playSfx('heavy')" class="py-3.5 px-4 rounded-2xl btn-gradient-crimson text-white font-bold text-xs uppercase flex items-center justify-center gap-2 border border-gold-solid/50 transition-all shadow-md">
+                                <i class="fa-solid fa-phone text-sm text-gold"></i>
+                                <span>CALL NOW</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Map Box -->
+                    <div class="rounded-3xl gradient-card-dark border border-gold-subtle p-2 flex flex-col card-3d min-h-[320px]">
+                        <div class="w-full h-full rounded-2xl bg-night border border-night-border relative overflow-hidden flex flex-col items-center justify-center p-6 text-center">
+                            <div class="w-20 h-20 rounded-full border-2 border-crimson p-0.5 bg-black mb-4 shadow-xl">
+                                <img class="brand-logo-img w-full h-full object-cover rounded-full" alt="Logo">
+                            </div>
+                            <h5 class="text-lg font-bold font-heading text-white mb-1">MUSCLE MANIA KAMAREDDY</h5>
+                            <p class="text-xs text-gray-400 max-w-xs mb-6">Beside SR Garndens, Old NH7 Road, Kamareddy, Telangana 503111</p>
+                            <a href="https://www.google.com/maps/place/Muscle+Mania+Fitness+Centre/@18.3152659,78.3330326,17z/data=!3m1!4b1!4m6!3m5!1s0x3bcc49d462de292d:0xfcbff58ac5f59550!8m2!3d18.3152659!4d78.3356129!16s%2Fg%2F11wn4b1hj0?entry=ttu&g_ep=EgoyMDI2MTAxOS4wIKXMDSoASAFQAw%3D%3D" target="_blank" onclick="playSfx('click')" class="px-6 py-3 rounded-full bg-gradient-to-r from-night-card to-night border border-gold-solid text-gold text-xs font-bold uppercase hover:border-crimson-solid hover:text-white transition-all flex items-center gap-2 shadow-lg">
+                                <i class="fa-solid fa-directions text-crimson"></i>
+                                <span>OPEN IN GOOGLE MAPS</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-b from-night to-black border-t border-night-border py-8 text-center text-xs text-gray-500 relative z-10 mb-16 md:mb-0">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <img class="brand-logo-img w-8 h-8 rounded-full border border-crimson" alt="Logo">
+                <span class="font-heading font-bold text-gray-300">MUSCLE MANIA CLUB</span>
+            </div>
+            <div>
+                © 2026 MUSCLE MANIA • ALL RIGHTS RESERVED.
+            </div>
+            <div class="flex gap-4 text-sm text-gray-400">
+                <a href="#home" onclick="playSfx('tick')" class="hover:text-gold transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#home" onclick="playSfx('tick')" class="hover:text-gold transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#home" onclick="playSfx('tick')" class="hover:text-gold transition-colors"><i class="fa-brands fa-facebook"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Quick Action Floating Bottom Bar -->
+    <div class="md:hidden fixed bottom-0 left-0 w-full z-50 bg-night/95 backdrop-blur-md border-t border-crimson-solid px-4 py-2.5 flex items-center justify-around shadow-2xl">
+        <a href="#home" onclick="playSfx('tick')" class="flex flex-col items-center text-gold text-xs font-semibold">
+            <i class="fa-solid fa-house text-base"></i>
+            <span class="text-[10px] mt-0.5">Home</span>
+        </a>
+        <a href="#gallery" onclick="playSfx('tick')" class="flex flex-col items-center text-gray-400 text-xs font-semibold hover:text-gold">
+            <i class="fa-solid fa-images text-base"></i>
+            <span class="text-[10px] mt-0.5">Gallery</span>
+        </a>
+        <a href="#pricing" onclick="playSfx('tick')" class="flex flex-col items-center text-gray-400 text-xs font-semibold hover:text-gold">
+            <i class="fa-solid fa-tag text-base"></i>
+            <span class="text-[10px] mt-0.5">Plans</span>
+        </a>
+        <a href="#bmi" onclick="playSfx('tick')" class="flex flex-col items-center text-gray-400 text-xs font-semibold hover:text-gold">
+            <i class="fa-solid fa-calculator text-base"></i>
+            <span class="text-[10px] mt-0.5">BMI</span>
+        </a>
+        <a href="https://wa.me/7036371095?text=Hi%20Muscle%20Mania!%20I%20want%20to%20join." target="_blank" onclick="playSfx('heavy')" class="flex flex-col items-center text-green-400 text-xs font-semibold">
+            <i class="fa-brands fa-whatsapp text-lg"></i>
+            <span class="text-[10px] mt-0.5">Chat</span>
+        </a>
+    </div>
+
+    <!-- JAVASCRIPT & SLIDESHOW ENGINE LOGIC -->
+    <script>
+        /* -------------------------------------------------------------
+           1. SINGLE CENTRALIZED VARIABLE FOR LOGO IMAGE SITE-WIDE
+           ------------------------------------------------------------- */
+        const LOGO_URL = 'logo.jpg';
+
+        function populateLogos() {
+            document.querySelectorAll('.brand-logo-img').forEach(img => {
+                img.src = LOGO_URL;
+            });
+        }
+
+
+        /* -------------------------------------------------------------
+           2. SLIDESHOW CONFIGURATION & FOLDER PATH VARIABLES
+           ------------------------------------------------------------- */
+        
+        // SPECIFY YOUR FOLDER PATH VARIABLE HERE:
+        const IMAGE_FOLDER_PATH = "images/gym/";
+
+        // SPECIFY YOUR IMAGE FILENAMES HERE:
+        const GYM_IMAGE_FILENAMES = [
+            "gym1.jpg",
+            "gym2.jpg",
+            "gym3.jpg",
+            "gym4.jpg",
+            "gym5.jpg"
+        ];
+
+        // Automatically maps the folder path and file list into the slideshow
+        let slideImages = GYM_IMAGE_FILENAMES.map((fileName, index) => ({
+            url: `${IMAGE_FOLDER_PATH}${fileName}`,
+            title: `MUSCLE MANIA ZONE ${index + 1}`,
+            subtitle: `Equipment view from ${IMAGE_FOLDER_PATH}`
+        }));
+
+        // Fallback placeholder images if local folder image files fail to load
+        const FALLBACK_SLIDES = [
+            { url: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=80", title: "HEAVY IRON DUMBBELL RACK", subtitle: "Solid Dumbbells up to 80KG with Olympic Benches" },
+            { url: "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=1200&q=80", title: "CARDIO MATRIX DECK", subtitle: "Commercial Treadmills, Stairmasters & Rowers" },
+            { url: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=1200&q=80", title: "CABLE CROSSOVER STATION", subtitle: "Multi-station cable towers for precision isolate training" },
+            { url: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=1200&q=80", title: "SQUAT RACKS & DEADLIFT PLATFORMS", subtitle: "Calibrated steel plates for powerlifting heavy sets" }
+        ];
+
+        let currentSlideIndex = 0;
+        let slideInterval = null;
+        let isAutoplay = true;
+
+        function initSlideshow() {
+            document.getElementById('folderPathDisplay').textContent = IMAGE_FOLDER_PATH;
+            renderDots();
+            showSlide(0);
+            startAutoplay();
+        }
+
+        function showSlide(index) {
+            if (slideImages.length === 0) return;
+
+            if (index < 0) {
+                currentSlideIndex = slideImages.length - 1;
+            } else if (index >= slideImages.length) {
+                currentSlideIndex = 0;
+            } else {
+                currentSlideIndex = index;
+            }
+
+            const imgEl = document.getElementById('slideshowImg');
+            const currentItem = slideImages[currentSlideIndex];
+
+            // Apply smooth transition effect
+            imgEl.classList.add('opacity-0', 'scale-95');
+
+            setTimeout(() => {
+                imgEl.src = currentItem.url;
+                imgEl.onerror = function() {
+                    // Fallback to placeholder if folder image is missing
+                    const fb = FALLBACK_SLIDES[currentSlideIndex % FALLBACK_SLIDES.length];
+                    this.src = fb.url;
+                    document.getElementById('slideTitle').textContent = fb.title;
+                    document.getElementById('slideSubtitle').textContent = fb.subtitle + " (Folder path placeholder demo)";
+                };
+
+                document.getElementById('slideCounter').textContent = `${currentSlideIndex + 1} / ${slideImages.length}`;
+                document.getElementById('slideTitle').textContent = currentItem.title;
+                document.getElementById('slideSubtitle').textContent = currentItem.subtitle;
+
+                imgEl.classList.remove('opacity-0', 'scale-95');
+                updateActiveDot();
+            }, 200);
+        }
+
+        function nextSlide() {
+            playSfx('tick');
+            showSlide(currentSlideIndex + 1);
+        }
+
+        function prevSlide() {
+            playSfx('tick');
+            showSlide(currentSlideIndex - 1);
+        }
+
+        function renderDots() {
+            const container = document.getElementById('slideDotsContainer');
+            container.innerHTML = '';
+            slideImages.forEach((_, idx) => {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.className = `w-3 h-3 rounded-full transition-all duration-300 ${idx === currentSlideIndex ? 'bg-gold w-8' : 'bg-gray-600 hover:bg-crimson'}`;
+                dot.onclick = () => {
+                    playSfx('click');
+                    showSlide(idx);
+                };
+                container.appendChild(dot);
+            });
+        }
+
+        function updateActiveDot() {
+            const dots = document.querySelectorAll('#slideDotsContainer button');
+            dots.forEach((dot, idx) => {
+                if (idx === currentSlideIndex) {
+                    dot.className = 'w-8 h-3 rounded-full bg-gold transition-all duration-300';
+                } else {
+                    dot.className = 'w-3 h-3 rounded-full bg-gray-600 hover:bg-crimson transition-all duration-300';
+                }
+            });
+        }
+
+        function startAutoplay() {
+            stopAutoplay();
+            slideInterval = setInterval(() => {
+                showSlide(currentSlideIndex + 1);
+            }, 3500);
+            isAutoplay = true;
+            updateAutoplayUI();
+        }
+
+        function stopAutoplay() {
+            if (slideInterval) clearInterval(slideInterval);
+            isAutoplay = false;
+            updateAutoplayUI();
+        }
+
+        function toggleAutoplay() {
+            playSfx('click');
+            if (isAutoplay) {
+                stopAutoplay();
+            } else {
+                startAutoplay();
+            }
+        }
+
+        function updateAutoplayUI() {
+            const btnText = document.getElementById('autoplayText');
+            const icon = document.getElementById('autoplayIcon');
+            const btn = document.getElementById('autoplayBtn');
+
+            if (isAutoplay) {
+                btnText.textContent = "PAUSE";
+                icon.className = "fa-solid fa-pause text-xs";
+                btn.className = "px-3.5 py-1.5 rounded-full bg-crimson/80 border border-crimson-solid text-white text-xs font-bold flex items-center gap-2 shadow-md hover:bg-crimson transition-all";
+            } else {
+                btnText.textContent = "PLAY";
+                icon.className = "fa-solid fa-play text-xs";
+                btn.className = "px-3.5 py-1.5 rounded-full bg-night-card border border-gold-solid text-gold text-xs font-bold flex items-center gap-2 shadow-md hover:bg-gold hover:text-night transition-all";
+            }
+        }
+
+
+        /* -------------------------------------------------------------
+           3. HIGH-BOOSTED WEB AUDIO API SYNTHESIZER ENGINE (SFX MAX)
+           ------------------------------------------------------------- */
+        let audioCtx = null;
+        let sfxEnabled = true;
+
+        function initAudio() {
+            if (!audioCtx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioContext();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        function playSfx(type) {
+            if (!sfxEnabled) return;
+            initAudio();
+            if (!audioCtx) return;
+
+            const now = audioCtx.currentTime;
+
+            if (type === 'tick') {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(850, now);
+                osc.frequency.exponentialRampToValueAtTime(1700, now + 0.04);
+                
+                gain.gain.setValueAtTime(0.8, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start(now);
+                osc.stop(now + 0.04);
+            } 
+            else if (type === 'click') {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(520, now);
+                osc.frequency.setValueAtTime(1040, now + 0.05);
+
+                gain.gain.setValueAtTime(0.85, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start(now);
+                osc.stop(now + 0.12);
+            } 
+            else if (type === 'heavy') {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(180, now);
+                osc.frequency.exponentialRampToValueAtTime(45, now + 0.25);
+
+                gain.gain.setValueAtTime(0.85, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start(now);
+                osc.stop(now + 0.25);
+            }
+        }
+
+        function toggleAudioEngine() {
+            sfxEnabled = !sfxEnabled;
+            const btnText = document.getElementById('sfxStatusText');
+            const icon = document.getElementById('sfxIcon');
+
+            if (sfxEnabled) {
+                btnText.textContent = "SFX MAX";
+                icon.className = "fa-solid fa-volume-high text-sm text-crimson";
+                playSfx('heavy');
+            } else {
+                btnText.textContent = "MUTED";
+                icon.className = "fa-solid fa-volume-xmark text-sm text-gray-500";
+            }
+        }
+
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            if (Math.abs(window.scrollY - lastScrollY) > 180) {
+                playSfx('tick');
+                lastScrollY = window.scrollY;
+            }
+        }, { passive: true });
+
+
+        /* -------------------------------------------------------------
+           4. PRICING PLAN WHATSAPP DYNAMIC TRIGGER
+           ------------------------------------------------------------- */
+        function claimPlan(planName, planDetails) {
+            playSfx('heavy');
+            const phone = "15550199882";
+            const message = encodeURIComponent(`Hi Muscle Mania! I would like to claim the *${planName}* (${planDetails}). Please share the onboarding details.`);
+            window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+        }
+
+
+        /* -------------------------------------------------------------
+           5. BMI CALCULATOR LOGIC
+           ------------------------------------------------------------- */
+        let currentGender = 'male';
+
+        function setGender(gender) {
+            currentGender = gender;
+            const btnM = document.getElementById('btnMale');
+            const btnF = document.getElementById('btnFemale');
+
+            if (gender === 'male') {
+                btnM.className = "py-3 rounded-2xl border border-crimson-solid btn-gradient-crimson text-white font-bold text-xs uppercase transition-all shadow-md";
+                btnF.className = "py-3 rounded-2xl border border-night-border bg-night text-gray-300 font-bold text-xs uppercase hover:border-gold-solid transition-all";
+            } else {
+                btnF.className = "py-3 rounded-2xl border border-crimson-solid btn-gradient-crimson text-white font-bold text-xs uppercase transition-all shadow-md";
+                btnM.className = "py-3 rounded-2xl border border-night-border bg-night text-gray-300 font-bold text-xs uppercase hover:border-gold-solid transition-all";
+            }
+            playSfx('click');
+            calculateBMI();
+        }
+
+        function calculateBMI() {
+            const h = parseFloat(document.getElementById('heightRange').value);
+            const w = parseFloat(document.getElementById('weightRange').value);
+
+            document.getElementById('heightVal').textContent = h;
+            document.getElementById('weightVal').textContent = w;
+
+            playSfx('tick');
+
+            const bmi = (w / ((h / 100) * (h / 100))).toFixed(1);
+            document.getElementById('bmiScore').textContent = bmi;
+
+            const catEl = document.getElementById('bmiCategory');
+            const adviceEl = document.getElementById('bmiAdvice');
+
+            if (bmi < 18.5) {
+                catEl.textContent = "UNDERWEIGHT";
+                catEl.className = "text-sm font-bold uppercase tracking-wider px-4 py-1.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/30 mb-4";
+                adviceEl.textContent = "Focus on caloric surplus and progressive overload in our Heavy Iron Zone!";
+            } else if (bmi >= 18.5 && bmi < 24.9) {
+                catEl.textContent = "NORMAL WEIGHT";
+                catEl.className = "text-sm font-bold uppercase tracking-wider px-4 py-1.5 rounded-full bg-gold/10 text-gold border border-gold-solid mb-4";
+                adviceEl.textContent = "Optimal body composition! Keep building lean mass with our custom biomechanical machines.";
+            } else if (bmi >= 25 && bmi < 29.9) {
+                catEl.textContent = "OVERWEIGHT";
+                catEl.className = "text-sm font-bold uppercase tracking-wider px-4 py-1.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/30 mb-4";
+                adviceEl.textContent = "Incorporate 20 mins of post-workout cardio on our Cardio Deck to shred down efficiently.";
+            } else {
+                catEl.textContent = "OBESE";
+                catEl.className = "text-sm font-bold uppercase tracking-wider px-4 py-1.5 rounded-full bg-crimson/10 text-crimson border border-crimson-solid mb-4";
+                adviceEl.textContent = "Our elite personal coaches can design a customized fat-loss & resistance plan for you.";
+            }
+        }
+
+
+        /* -------------------------------------------------------------
+           6. BACKGROUND GOLD & CRIMSON PARTICLES CANVAS ENGINE
+           ------------------------------------------------------------- */
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2.5 + 0.5;
+                this.speedY = -(Math.random() * 0.4 + 0.1);
+                this.speedX = (Math.random() - 0.5) * 0.2;
+                this.opacity = Math.random() * 0.5 + 0.2;
+                this.isCrimson = Math.random() > 0.5;
+            }
+
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+
+                if (this.y < 0) {
+                    this.y = canvas.height;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+
+            draw() {
+                ctx.fillStyle = this.isCrimson 
+                    ? `rgba(220, 38, 38, ${this.opacity})` 
+                    : `rgba(212, 175, 55, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.min(Math.floor(window.innerWidth / 18), 70);
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+
+        /* -------------------------------------------------------------
+           7. 3D CARD TILT EFFECT & INTERACTIVE LISTENERS
+           ------------------------------------------------------------- */
+        function init3DTilt() {
+            const cards = document.querySelectorAll('.card-3d');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    const rotateX = ((y - centerY) / centerY) * -6;
+                    const rotateY = ((x - centerX) / centerX) * 6;
+
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+                });
+            });
+        }
+
+        function highlightNavOnScroll() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            let current = 'home';
+            sections.forEach(sec => {
+                const sectionTop = sec.offsetTop - 120;
+                if (window.scrollY >= sectionTop) {
+                    current = sec.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', highlightNavOnScroll);
+
+        window.onload = function() {
+            populateLogos();
+            resizeCanvas();
+            initParticles();
+            animateParticles();
+            init3DTilt();
+            calculateBMI();
+            initSlideshow();
+
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                initParticles();
+            });
+
+            document.body.addEventListener('click', () => {
+                initAudio();
+            }, { once: true });
+        };
+    </script>
+</body>
+</html>
